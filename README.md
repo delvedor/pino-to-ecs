@@ -1,6 +1,6 @@
 # pino-to-ecs
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)  
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)  [![Build Status](https://travis-ci.org/delvedor/pino-to-ecs.svg?branch=master)](https://travis-ci.org/delvedor/pino-to-ecs)  [![codecov](https://codecov.io/gh/delvedor/pino-to-ecs/branch/master/graph/badge.svg)](https://codecov.io/gh/delvedor/pino-to-ecs)
 
 Converts [Pino](http://getpino.io) logs to [Elastic Common Schema](https://www.elastic.co/guide/en/ecs/current/ecs-reference.html).<br/>
 It pairs well with Pino and [Filebeat](https://www.elastic.co/products/beats/filebeat), while [pino-elasticsearch](https://github.com/pinojs/pino-elasticsearch) integrates this module.
