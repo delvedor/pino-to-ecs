@@ -7,7 +7,10 @@
     "pino-to-ecs": "./index.js"
   },
   "scripts": {
-    "test": "standard && tap test.js"
+    "lint": "standard",
+    "unit": "tap test.js --no-coverage",
+    "test": "npm run lint && npm run unit",
+    "ci": "nyc npm run unit && nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "repository": {
     "type": "git",
@@ -27,6 +30,7 @@
   },
   "homepage": "https://github.com/delvedor/pino-to-ecs#readme",
   "devDependencies": {
+    "codecov": "^3.5.0",
     "fastify": "^2.5.0",
     "pino": "^5.12.6",
     "pino-http": "^4.2.0",
