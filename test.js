@@ -33,10 +33,7 @@ test('toEcs', t => {
       v: 1
     }
 
-    const log = toEcs(incomingPost)
-    t.type(log, 'string')
-    t.strictEqual(log.slice(-1), '\n')
-    t.deepEqual(JSON.parse(log.slice(0, -1)), {
+    t.deepEqual(toEcs(incomingPost), {
       ecs: { version: '1.0.0' },
       event: { id: 1 },
       '@timestamp': 1561122678406,
@@ -94,10 +91,7 @@ test('toEcs', t => {
       v: 1
     }
 
-    const log = toEcs(incomingError)
-    t.type(log, 'string')
-    t.strictEqual(log.slice(-1), '\n')
-    t.deepEqual(JSON.parse(log.slice(0, -1)), {
+    t.deepEqual(toEcs(incomingError), {
       ecs: { version: '1.0.0' },
       event: { id: 1 },
       error: {
@@ -161,10 +155,7 @@ test('toEcs', t => {
       v: 1
     }
 
-    const log = toEcs(outgoingResponse)
-    t.type(log, 'string')
-    t.strictEqual(log.slice(-1), '\n')
-    t.deepEqual(JSON.parse(log.slice(0, -1)), {
+    t.deepEqual(toEcs(outgoingResponse), {
       ecs: { version: '1.0.0' },
       event: {
         id: 1,
