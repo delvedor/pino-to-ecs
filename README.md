@@ -49,7 +49,8 @@ const toEcs = require('pino-to-ecs')
 const transform = new Transform({
   objectMode: true,
   transform: function (chunk, encoding, callback) {
-    callback(null, toEcs(chunk))
+    const log = JSON.stringify(toEcs(chunk)) + '\n'
+    callback(null, log)
   }
 })
 ```
