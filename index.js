@@ -36,7 +36,8 @@ function pinoToEcs (input = process.stdin, output = process.stdout) {
   const transform = new Transform({
     objectMode: true,
     transform: function (chunk, encoding, callback) {
-      callback(null, toEcs(chunk))
+      const log = stringify(toEcs(chunk)) + '\n'
+      callback(null, log)
     }
   })
 
@@ -182,7 +183,7 @@ function toEcs (chunk) {
     }
   }
 
-  return stringify(log) + '\n'
+  return log
 }
 
 /* istanbul ignore next */
