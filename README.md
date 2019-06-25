@@ -14,6 +14,8 @@ npm i pino-to-ecs
 This module can be used in two ways, from the cli or programmatically.<br/>
 You can play with this module with the files in the `examples` folder.
 
+*Note*: If `pino-to-ecs` can't remap a field to Elastic Common Schema, it will put it inside a `pino` object in the logs.
+
 ### CLI Usage
 ```
 node app.js | pino-to-ecs

@@ -10,12 +10,14 @@ const { pinoToEcs } = toEcs
 test('toEcs', t => {
   t.test('Should parse a basic log', t => {
     const incomingPost = {
+      random: false,
       level: 30,
       time: 1561122678406,
       pid: 65354,
       hostname: 'Skadi.local',
       reqId: 1,
       req: {
+        other: true,
         method: 'POST',
         url: '/body',
         headers: {
@@ -52,16 +54,23 @@ test('toEcs', t => {
           }
         }
       },
-      url: { path: '/body' },
+      url: {
+        path: '/body',
+        domain: 'localhost',
+        port: 3000
+      },
       client: { address: '127.0.0.1', port: 62061 },
       user_agent: { original: 'curl/7.54.0' },
-      req: { hostname: 'localhost:3000' }
+      pino: {
+        random: false,
+        req: { other: true }
+      }
     })
     t.end()
   })
 
   t.test('Should parse a basic error log', t => {
-    const stack = 'Error: kaboom\n    at Object.fastify.get (/Users/delvedor/Development/pino-to-ecs/examples/fastify.js:42:9)\n    at preHandlerCallback (/Users/delvedor/Development/pino-to-ecs/node_modules/fastify/lib/handleRequest.js:112:30)\n    at preValidationCallback (/Users/delvedor/Development/pino-to-ecs/node_modules/fastify/lib/handleRequest.js:101:5)\n    at handler (/Users/delvedor/Development/pino-to-ecs/node_modules/fastify/lib/handleRequest.js:70:5)\n    at handleRequest (/Users/delvedor/Development/pino-to-ecs/node_modules/fastify/lib/handleRequest.js:19:5)\n    at onRunMiddlewares (/Users/delvedor/Development/pino-to-ecs/node_modules/fastify/lib/middleware.js:22:5)\n    at middlewareCallback (/Users/delvedor/Development/pino-to-ecs/node_modules/fastify/lib/route.js:354:5)\n    at next (/Users/delvedor/Development/pino-to-ecs/node_modules/fastify/lib/hooks.js:66:7)\n    at handleResolve (/Users/delvedor/Development/pino-to-ecs/node_modules/fastify/lib/hooks.js:77:5)\n    at process._tickCallback (internal/process/next_tick.js:68:7)'
+    const stack = 'Error: kaboom\n    at Object.fastify.get (/pino-to-ecs/examples/fastify.js:42:9)\n    at preHandlerCallback (/pino-to-ecs/node_modules/fastify/lib/handleRequest.js:112:30)\n    at preValidationCallback (/pino-to-ecs/node_modules/fastify/lib/handleRequest.js:101:5)\n    at handler (/pino-to-ecs/node_modules/fastify/lib/handleRequest.js:70:5)\n    at handleRequest (/pino-to-ecs/node_modules/fastify/lib/handleRequest.js:19:5)\n    at onRunMiddlewares (/pino-to-ecs/node_modules/fastify/lib/middleware.js:22:5)\n    at middlewareCallback (/pino-to-ecs/node_modules/fastify/lib/route.js:354:5)\n    at next (/pino-to-ecs/node_modules/fastify/lib/hooks.js:66:7)\n    at handleResolve (/pino-to-ecs/node_modules/fastify/lib/hooks.js:77:5)\n    at process._tickCallback (internal/process/next_tick.js:68:7)'
 
     const incomingError = {
       level: 50,
@@ -116,16 +125,20 @@ test('toEcs', t => {
           status_code: 500
         }
       },
-      url: { path: '/error' },
+      url: {
+        path: '/error',
+        domain: 'localhost',
+        port: 3000
+      },
       client: { address: '127.0.0.1', port: 62109 },
-      user_agent: { original: 'curl/7.54.0' },
-      req: { hostname: 'localhost:3000' }
+      user_agent: { original: 'curl/7.54.0' }
     })
     t.end()
   })
 
   t.test('Response log', t => {
     const outgoingResponse = {
+      random: false,
       level: 30,
       time: 1561124998358,
       pid: 73235,
@@ -183,7 +196,10 @@ test('toEcs', t => {
       url: { path: '/hello' },
       client: { address: '::1', port: 62385 },
       user_agent: { original: 'curl/7.54.0' },
-      res: { other: true }
+      pino: {
+        random: false,
+        res: { other: true }
+      }
     })
     t.end()
   })
