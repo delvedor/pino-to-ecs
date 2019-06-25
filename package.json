@@ -1,6 +1,6 @@
 {
   "name": "pino-to-ecs",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Convert Pino logs to Elastic Common Schema",
   "main": "index.js",
   "bin": {
