@@ -63,8 +63,14 @@ function toEcs (chunk) {
     responseTime,
     // there is no need to keep this field
     v,
-    ...log
+    ...pino
   } = chunk
+
+  const log = {}
+
+  if (Object.keys(pino).length) {
+    log.pino = pino
+  }
 
   log.ecs = { version: '1.0.0' }
 
@@ -117,6 +123,7 @@ function toEcs (chunk) {
       remoteAddress,
       remotePort,
       headers,
+      hostname,
       ...filteredReq
     } = req
 
@@ -131,6 +138,12 @@ function toEcs (chunk) {
 
     log.url = log.url || {}
     log.url.path = url
+
+    if (hostname) {
+      const [host, port] = hostname.split(':')
+      log.url.domain = host
+      if (port) log.url.port = Number(port)
+    }
 
     log.client = log.client || {}
     log.client.address = remoteAddress
@@ -155,7 +168,8 @@ function toEcs (chunk) {
     }
 
     if (Object.keys(filteredReq).length) {
-      log.req = filteredReq
+      log.pino = log.pino || {}
+      log.pino.req = filteredReq
     }
   }
 
@@ -179,7 +193,8 @@ function toEcs (chunk) {
     }
 
     if (headers && Object.keys(filteredRes).length) {
-      log.res = filteredRes
+      log.pino = log.pino || {}
+      log.pino.res = filteredRes
     }
   }
 
