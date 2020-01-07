@@ -4,7 +4,7 @@ const { test } = require('tap')
 const Pino = require('pino')
 const { Transform } = require('readable-stream')
 const split = require('split2')
-const toEcs = require('./index')
+const toEcs = require('./lib')
 const { pinoToEcs } = toEcs
 
 test('toEcs', t => {

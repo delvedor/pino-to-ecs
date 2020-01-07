@@ -2,9 +2,9 @@
   "name": "pino-to-ecs",
   "version": "0.2.0",
   "description": "Convert Pino logs to Elastic Common Schema",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "bin": {
-    "pino-to-ecs": "./index.js"
+    "pino-to-ecs": "./cli/index.js"
   },
   "scripts": {
     "lint": "standard",
